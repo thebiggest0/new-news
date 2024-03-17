@@ -17,7 +17,7 @@ const calender = () => {
     }
 
     return (
-        <section id="calendar" className="p-20">
+        <section id="calendar" className="px-20 pt-20">
             <div className="flex w-5/6 mx-auto flex-col items-center gap-10">
                 <div className="w-96 h-96">
 

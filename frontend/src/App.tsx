@@ -1,6 +1,7 @@
 import Navbar from "@/scenes/navbar";
 import News from "./scenes/news";
 import Calendar from "./scenes/calendar";
+import Filter from "./scenes/filter";
 import { useEffect, useState } from "react";
 import { SelectedPage } from "@/shared/types";
 
@@ -29,8 +30,13 @@ function App() {
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
       />
-      <News />
-      <Calendar />
+      <div className="flex ">
+        <News />
+        <div>
+          <Calendar/>
+          <Filter />
+        </div>
+      </div>
     </div>
   )
 }
