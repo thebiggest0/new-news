@@ -23,9 +23,10 @@ dist-ssr
 *.sln
 
 # backend
+__pycache__
 /backend/api/db_info.py
 /backend/backend/__pycache__/
 /backend/api/__pycache__/
 /backend/*.pyc
 /backend/api/*.pyc
-
+/backend/backend/*.pyc
