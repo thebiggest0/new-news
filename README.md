@@ -25,6 +25,18 @@ iv. >python set interpreter to venv
 
 5. python manage.py migrate
 
+## Choose Database
+
+i. make sure pip install proper packages (MySql -> mysqlclient, might need pkg-config mysql too)
+
+ii. decide if table already exist or making new one b/c have to fake it if already exists for makemigration
+
+1. MySQL: edit DATABASES in setting.py with proper info (see setting.py)
+
+2. migrate
+
+3. edit model (see model.py)
+
 ## Create admin acc
 
 1. python manage.py createsuperuser (CMD) - put in info
