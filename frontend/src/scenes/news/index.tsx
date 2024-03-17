@@ -32,11 +32,11 @@ const News = () => {
         <section className='gap-16 bg-gray-20 py-10 md:h-5/6 md:pb-0 pt-20 px-10'>
             <h1>News</h1>
             <ul>
-                {state.map((article: any, index: number) => {
+                {state.slice(0, 5).map((article: any, index: number) => {
                     return (
                         <li key={index}>
                             <h2>{article.title}</h2>
-                            <p>{article.body}</p>
+                            <p>{article.description}</p>
                         </li>
                     );
                 })}

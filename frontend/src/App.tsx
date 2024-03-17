@@ -1,5 +1,6 @@
 import Navbar from "@/scenes/navbar";
 import News from "./scenes/news";
+import Calendar from "./scenes/calendar";
 import { useEffect, useState } from "react";
 import { SelectedPage } from "@/shared/types";
 
@@ -29,6 +30,7 @@ function App() {
         setSelectedPage={setSelectedPage}
       />
       <News />
+      <Calendar />
     </div>
   )
 }
