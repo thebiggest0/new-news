@@ -23,6 +23,18 @@ function App() {
     window.addEventListener("scroll", handleScroll);
   }, []);
 
+  const [stateNews, setStateNews] = useState([]);
+  useEffect(() => {
+    getNews();
+  },[]);
+
+  const getNews = async (category?: string) => {
+    const endpoint = category ? `/api/news/${category}` : '/api/news/';
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    setStateNews(data);
+  }
+
   return (
     <div className="flex flex-col">
       <Navbar
@@ -30,12 +42,14 @@ function App() {
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
       />
-      <div className="flex ">
-        <News />
-        <div>
-          <Calendar/>
-          <Filter />
+      <div className="flex justify-between">
+        <div className="w-1/6">
+          <div className="fixed">
+            <Calendar />
+            <Filter getNews={getNews} />
+          </div>
         </div>
+        <News state={stateNews}/>
       </div>
     </div>
   )
