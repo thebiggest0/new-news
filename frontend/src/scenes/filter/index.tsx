@@ -1,89 +1,33 @@
-// import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-// type Props = {}
+type Props = {
+    getNews: (category?: string) => Promise<void>; // Assuming getNews is async
+};
 
-// const Filter = (props: Props) => {
-//     let [state, setState] = useState([]);
-//     useEffect(() => {
-//         getNews(category);
-//     }, []);
+const categories = ['business', 'sports', 'technology', 'world'];
 
-//     let getNews = async (category: any) => {
-//         let response = await fetch(`/api/news/${category}`)
-//         let data = await response.json();
-//         setState(data);
-//     }
-
-
-//     return (
-//         <section className='px-20'>
-//             <ul>
-//                 <li className='mt-12 lg:mt-8'>
-//                     <h5 className='mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200'>Category</h5>
-//                     <ul className='space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800'>
-//                         <li><a onClick={getNews('business')}
-//                         className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300' href="">
-//                             Business</a></li>
-//                         <li><a className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300' href="">
-//                             Sports</a></li>
-//                         <li><a className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300' href="">
-//                             Technology</a></li>
-//                         <li><a className='block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300' href="">
-//                             World</a></li>
-//                     </ul>
-//                 </li>
-//             </ul>
-//         </section>
-//     )
-// }
-
-// export default Filter
-
-import React, { useState } from 'react';
-
-type Props = {};
-
-const Filter: React.FC<Props> = (props) => {
-    let [state, setState] = useState([]);
-
-    let getNews = async (category: string) => {
-        let response = await fetch(`/api/news/${category}`);
-        let data = await response.json();
-        setState(data);
-        console.log(data)
-    };
-
-    const handleCategoryClick = (category: string) => (event: React.MouseEvent) => {
-        event.preventDefault(); // Prevents default anchor action
-        getNews(category);
-    };
+const Filter: React.FC<Props> = ({ getNews }) => {
+  const handleCategoryClick = (category?: string) => async (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    await getNews(category);
+  };
 
     return (
-        <section className='px-20'>
+        <section className='px-20 w-1/6'>
             <ul>
                 <li className='mt-12 lg:mt-8'>
                     <h5 className='mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200'>Category</h5>
+                    <li>
+                        <a href="" onClick={handleCategoryClick()}>Reset</a>
+                    </li>
                     <ul className='space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800'>
-                        <li>
-                            <a onClick={handleCategoryClick('business')} href="#" className='block ...'>
-                                Business
-                            </a>
-                        </li>
-                        <li>
-                            <a onClick={handleCategoryClick('sports')} href="#" className='block ...'>
-                                Sports
-                            </a>
-                        </li>
-                        <li>
-                            <a onClick={handleCategoryClick('technology')} href="#" className='block ...'>
-                                Technology
-                            </a>
-                        </li>
-                        <li>
-                            <a onClick={handleCategoryClick('world')} href="#" className='block ...'>
-                                World
-                            </a>
-                        </li>
+                        {categories.map((category) => (
+                            <li key={category}>
+                                <a onClick={handleCategoryClick(category)} href="#" className='block hover:border-slate-400 text-slate-700 hover:text-slate-900 no-underline'>
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </li>
             </ul>
